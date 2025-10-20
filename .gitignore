@@ -1,0 +1,24 @@
+# Fichiers d'environnement du projet secure-app
+backend/.env
+.env
+backend/.env.local
+backend/.env.*.local
+
+# Certificats SSL
+certs/
+**/*.pem
+**/*.key
+
+# Dependencies
+**/node_modules/
+
+# Build outputs
+**/dist/
+**/build/
+
+# Logs
+**/*.log
+
+# IDE
+.vscode/
+.idea/
