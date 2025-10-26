@@ -1,1 +1,18 @@
-<p>login works!</p>
+<form [formGroup]="form" class="login-form">
+    <div>
+        <label>Login</label>
+        <input name="login" formControlName="login" placeholder="login"/>
+    </div>
+    <div>
+        <label>Mot de passe</label>
+        <input name="password" type="password" formControlName="password" placeholder="password" />
+    </div>
+    <button type="button" (click)="onSubmit()" [disabled]="auth.isLoading() || form.invalid">Connexion</button>
+
+    @if (auth.isLoading()) {
+        <div class="loading">Connexion en cours...</div>
+    }
+    @if (auth.error() && !auth.isLoading()) {
+        <div class="error">{{ auth.error() }}</div>
+    }
+</form>
