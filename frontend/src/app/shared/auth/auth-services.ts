@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { UserDto } from '../../types/user-dto'
-import { environment } from '@env/environment'
+import { environment } from '../../../environments/environment'
 import { catchError, finalize, of, tap } from 'rxjs' 
 
 @Injectable({
