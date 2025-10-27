@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<header class="topbar">
+    <a routerLink="/home">Home</a>
+    @if (auth.isAdmin()){
+        <a routerLink="/admin">Admin</a>
+    }
+    @if (!auth.isLoggedIn()) {
+        <a routerLink="/login">Login</a>
+    }
+    
+</header>
+
+<main class="content">
+    <router-outlet></router-outlet>
+</main>

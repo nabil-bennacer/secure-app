@@ -1,0 +1,13 @@
+<div class="home-container">
+  @if (auth.isLoggedIn()) {
+    <div>
+      <!-- si on fait un refresh, le login du user n'apparait pas car dans le token on n'a que l'id et le rôle -->
+      <h2>Bienvenue, {{ auth.currentUser()?.login }}</h2>
+      <button (click)="logout()">Déconnexion</button>
+    </div>
+  } @else {
+    <div>
+      <a routerLink="/login">Se connecter</a>
+    </div>
+  }
+</div>
