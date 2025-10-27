@@ -64,8 +64,8 @@
           },
           "options": {
             "ssl": true,
-            "sslKey": "../certs/localhost-key.pem",
-            "sslCert": "../certs/localhost.pem"
+            "sslKey": "../backend/certs/localhost-key.pem",
+            "sslCert": "../backend/certs/localhost.pem"
           },
           "defaultConfiguration": "development"
         },
