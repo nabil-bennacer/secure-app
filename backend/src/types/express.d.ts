@@ -1,5 +1,4 @@
-import type { TokenPayload } from './token-payload.ts'
-
+import type { TokenPayload } from './token-payload.js'
 declare global {
   namespace Express { // on rajoute user au type Request de express
     interface Request {
@@ -9,6 +8,5 @@ declare global {
     }
   }
 }
-
 // Nécessaire pour que TypeScript traite ce fichier comme un module
-export {}
+export {};

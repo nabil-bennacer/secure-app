@@ -1,4 +1,4 @@
-import pkg from 'pg'
+import * as pkg from 'pg'
 const { Pool } = pkg
 // Récupération de la variable d'environnement Docker
 const pool = new Pool({

@@ -1,4 +1,5 @@
-import type { Response, NextFunction } from 'express'
+import type {Response, NextFunction } from 'express'
+
 
 // --- Middleware d'autorisation ---
 export function requireAdmin(req: Express.Request,

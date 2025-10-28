@@ -1,23 +1,25 @@
-import fs from 'fs'
-import https from 'https'
-import express from 'express'
-import cors from 'cors'
-import morgan from 'morgan'
-import cookieParser from 'cookie-parser'
-import publicRouter from './routes/public.ts'
-import { ensureAdmin } from './db/initAdmin.ts'
-await ensureAdmin() // Vérification ou création du compte admin
-import usersRouter from './routes/users.ts'
-import 'dotenv/config'
-import authRouter from './routes/auth.ts'
-import { verifyToken } from './middleware/token-management.ts'
-import { requireAdmin } from './middleware/auth-admin.ts'
+import * as fs from 'fs';
+import * as https from 'https';
+import express from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
+import publicRouter from './routes/public.js';
+import { ensureAdmin } from './db/initAdmin.js';
+(async () => {
+  await ensureAdmin(); // Vérification ou création du compte admin
+})();
+import usersRouter from './routes/users.js';
+import 'dotenv/config';
+import authRouter from './routes/auth.js';
+import { verifyToken } from './middleware/token-management.js';
+import { requireAdmin } from './middleware/auth-admin.js';
 
 // Création de l'application Express
 const app = express()
 
 // Ajout manuel des principaux en-têtes HTTP de sécurité
-app.use((req, res, next) => {
+app.use((req: any, res: any, next: any) => {
   // Empêche le navigateur d'interpréter un fichier d'un autre type MIME -> attaque : XSS via upload malveillant
   res.setHeader('X-Content-Type-Options', 'nosniff')
   // Interdit l'intégration du site dans des iframes externes -> attaque : Clickjacking
@@ -39,7 +41,7 @@ app.use(cookieParser())
 
 // Configuration CORS : autoriser le front Angular en HTTPS local
 app.use(cors({
-  origin: 'https://localhost:8080',
+  origin: 'http://localhost:8080',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -50,8 +52,8 @@ app.use('/api/public', publicRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/users', verifyToken, usersRouter); // protégé
-app.use('/api/admin', verifyToken, requireAdmin, (req, res) => {
- res.json({ message: 'Bienvenue admin' });
+app.use('/api/admin', verifyToken, requireAdmin, (req: any, res: any) => {
+  res.json({ message: 'Bienvenue admin' });
 }) 
 
 // Chargement du certificat et clé générés par mkcert (étape 0)

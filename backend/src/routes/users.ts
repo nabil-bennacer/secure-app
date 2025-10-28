@@ -1,8 +1,10 @@
 import { Router } from 'express'
-import pool from '../db/database.ts'
-import bcrypt from 'bcryptjs'
-import { verifyToken} from '../middleware/token-management.ts'
-import { requireAdmin } from '../middleware/auth-admin.ts'
+import type { Response } from 'express'
+import type { Request } from 'express'
+import pool from '../db/database.js'
+import * as bcrypt from 'bcryptjs'
+import { verifyToken} from '../middleware/token-management.js'
+import { requireAdmin } from '../middleware/auth-admin.js'
 
 const router = Router()
 
@@ -20,7 +22,7 @@ router.get('/me', verifyToken, async (req, res) => {
 
 
 // Liste de tous les utilisateurs (réservée aux admins)
-router.get('/', [verifyToken,requireAdmin], async (_req, res) => {
+router.get('/', [verifyToken,requireAdmin], async (_req : Request, res : Response) => {
   const { rows } = await pool.query(
     'SELECT id, login, role FROM users ORDER BY id'
   )

@@ -1,15 +1,16 @@
 import { Router } from 'express'
-import jwt from 'jsonwebtoken'
-import bcrypt from 'bcryptjs'
-import pool from '../db/database.ts'
-import { verifyToken, createAccessToken, createRefreshToken} from '../middleware/token-management.ts'
-import type { TokenPayload } from '../types/token-payload.ts'
-import { JWT_SECRET } from '../config/env.ts'
+import type { Request, Response } from 'express'
+import * as jwt from 'jsonwebtoken'
+import * as bcrypt from 'bcryptjs'
+import pool from '../db/database.js'
+import { verifyToken, createAccessToken, createRefreshToken} from '../middleware/token-management.js'
+import type { TokenPayload } from '../types/token-payload.js'
+import { JWT_SECRET } from '../config/env.js'
 
 
 const router = Router()
 
-router.get('/whoami', verifyToken, (req, res) => {
+router.get('/whoami', verifyToken, (req : Request, res : Response) => {
  res.json({ user: req.user })
 }) 
 
